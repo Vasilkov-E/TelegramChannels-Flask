@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block table %}
+    <style>
+
+        table {
+            border: 1px solid #69c;
+        }
+
+        th {
+            font-weight: normal;
+            color: #039;
+            border-bottom: 1px dashed #69c;
+            padding: 12px 17px;
+        }
+
+        td {
+            color: #669;
+            padding: 7px 17px;
+        }
+
+        tr:hover td {
+            background: #ccddff;
+        }
+
+        .animated-search-form[type=search] {
+            width: 10rem;
+            border: 0.125rem solid #e6e6e6;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.18);
+            border-radius: 0;
+            background-image: url("https://image.ibb.co/i7NbrQ/search_icon_15.png");
+            background-position: 0.625rem 0.625rem;
+            background-repeat: no-repeat;
+            padding: 0.75rem 1.25rem 0.75rem 2rem;
+            transition: width 0.4s ease-in-out;
+        }
+
+        .animated-search-form[type=search]:focus {
+            width: 70%;
+        }
+    </style>
+
+
+    <div class="container-xl">
+        <h1>Таблиця</h1>
+
+        <form id="form" name="form" method="GET">
+            <input type="search" placeholder="Пошук.." class="animated-search-form" name="q"
+                   value="{{ request.args.get('q', '') }}">
+        </form><br>
+        <form id="myform" name="myform" method="POST">
+            <a type="submit" href="/add" class="btn btn-primary">Створити</a>
+            {#            <button type="button" class="btn btn-warning">Редактировать</button>#}
+            <button type="submit" form="myform" class="btn btn-danger">Видалити</button>
+            <br>
+            <br>
+            <table width="100%">
+                <tr>
+                    <th width="5%"></th>
+                    <th width="5%">№</th>
+                    <th width="25%">Канал</th>
+                    <th width="33%">ФІО</th>
+                    <th width="33%">Контактна інформація для зв'язку</th>
+                    {#  contact_information_for_communication#}
+
+                </tr>
+
+                {% for el in  pages.items %}
+                    <tr>
+                        <td><input type="checkbox" value={{ el['id'] }} id={{ el['id'] }}
+                                   name={{ el['id'] }}></td>
+                        <td>{{ loop.index }}</td>
+                        <td><a href="/channel/{{ el['id'] }}">{{ el['name'] }}</a></td>
+                        <td>{{ el['name_administrator'] }}</td>
+                        <td>{{ el['contact_information_for_communication'] }}</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </form>
+        <br>
+
+
+        <ul class="pagination">
+            <li {% if pages.has_prev %}  class="page-item"> {% endif %}
+            <a class="page-link" href="./?page={{ pages.prev_num }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+            {% for page in pages.iter_pages() %}
+                <li {% if page==pages.page %}class="page-item active"{% endif %}>
+                    <a class="page-link" href="./?page={{ page }}">
+                        {{ page }}<span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            {% endfor %}
+
+            {#                <li class="page-item"><a class="page-link" href="./?page={{ pages.  }}">1</a></li>#}
+            {#                <li class="page-item"><a class="page-link" href="#">2</a></li>#}
+            {#                <li class="page-item"><a class="page-link" href="#">3</a></li>#}
+
+
+            <li {% if pages.has_next %}  class="page-item" {% endif %} >
+                <a class="page-link" href="./?page={{ pages.next_num }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+{% endblock %}

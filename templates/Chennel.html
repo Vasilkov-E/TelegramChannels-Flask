@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block channel %}
+    <div class="container-sm">
+        {% for el in all_channel %}
+            <bloc class="blockquote text-center">
+                <h3>Місто ДНІПРО</h3><br>
+            </bloc>
+            <bloc class="blockquote text-center">
+                <h4>{{ all_channel[el]['name'] }}</h4><br>
+            </bloc>
+            <h4>Загальна інформація про ресурс</h4><br>
+            {{ all_channel[el]['general_information_about_the_resource'] }}<br><br>
+            {% if all_channel[el]['adres_img_for_general_information_about_the_resource'] != '/static/images/'+all_channel[el]["name"]+'/' %}
+                <img src="{{ all_channel[el]['adres_img_for_general_information_about_the_resource'] }}" width="600px"
+                     align="center" hspace="20%" vspace="1%"/><br><br>
+            {% endif %}
+            <b>Дата створення ресурсу:</b>   {{ all_channel[el]['date_of_resourc_creation'] }}<br><br>
+            <b>Інші соціальні площадки (Facebook, Vk.com, Instagram):</b><br>
+            {{ all_channel[el]['other_social_platforms'] }}<br><br>
+            <h4>Вміст ресурсу (станом на: {{ all_channel[el]['resource_content_date'] }} )</h4><br>
+            <b>Канал розміщує близько {{ all_channel[el]['publications_per_day'] }} публікацій в день.</b><br><br>
+            <b>Основна спрямованість каналу: </b>{{ all_channel[el]['the_main_focus_of_the_channel'] }}<br><br>
+            <b>Суміжні напрямки: </b>{{ all_channel[el]['related_areas'] }}<br><br>
+            <b>Вміст каналу: </b>{{ all_channel[el]['channel_content'] }}<br><br>
+            <b>Перегляди:</b><br><br>
+            {% if all_channel[el]['adres_img_for_views'] !='/static/images/'+all_channel[el]["name"]+'/' %}
+                <img src="{{ all_channel[el]['adres_img_for_views'] }}" width="600px"
+                     align="center" hspace="20%" vspace="1%"/><br><br>
+            {% endif %}
+            <h4>Контактна інформація для зв'язку</h4><br>
+
+            {% if all_channel[el]['adres_img_for_contact_information_for_communication'] !='/static/images/'+all_channel[el]["name"]+'/' %}
+                <table width="100%">
+                    <tr>
+                        <th width="50%">
+                            <img src="{{ all_channel[el]['adres_img_for_contact_information_for_communication'] }}"
+                                 width="400px"
+                                 align="center" vspace="1%"/>
+                        </th>
+                        <th width="50%">
+                            На каналі зазначений контакт для співпраці та розміщення реклами:
+                            <b> {{ all_channel[el]['contact_information_for_communication'] }}</b><br><br></th>
+                    </tr>
+                </table>
+            {% else %}
+                На каналі зазначений контакт для співпраці та розміщення реклами:
+                            <b> {{ all_channel[el]['contact_information_for_communication'] }}</b><br><br></th>
+            {% endif %}
+
+            <h4>Платіжні засоби (належність), прайси на оплату реклами, умови</h4><br>
+            <b>Прайс на розміщення реклами, новин: </b><br><br>
+            {% for s in all_channel[el].price_for_advertising_news[::] -%}
+                {{ s }}<br><br>
+            {% endfor %}
+            <b>Оплата здійснюється на карти:</b><br><br>
+            {% for s in all_channel[el].payment_is_made_by_card[::] -%}
+                {{ s }}<br><br>
+            {% endfor %}
+            <h4>Причетні до ресурсу особи</h4><br>
+
+            <table width="100%">
+                <tr>
+                    <th width="40%">
+{#                        {% if all_channel[el]['adres_img_for_photo_admin'] !='/static/images/'+all_channel[el]["name"]+'/' %}#}
+                        <img src="{{ all_channel[el]['adres_img_for_photo_admin'] }}" width="400px"
+                             align="center" vspace="1%"/>
+{#                        {% else %}#}
+{#                             <img src="{{ all_channel[el]['adres_img_for_photo_admin'] }}" width="400px"#}
+{#                             align="center" vspace="1%"/>#}
+{#                            {% else %}#}
+{#                        {% endif %}#}
+                    </th>
+                    <td width="60%">
+                        <ol>
+                            <li><b>{{ all_channel[el]['name_administrator'] }}</b><br><br></li>
+                            <li><b>Дата народження:</b> {{ all_channel[el]['date_of_birth'] }}<br><br></li>
+                            <li><b>Місце народження:</b> {{ all_channel[el]['place_of_birth'] }}<br><br></li>
+                            <li><b>Телефон:</b> {{ all_channel[el]['phone_number'] }}<br><br></li>
+                            <li><b>Паспорт громадянина України:</b> {{ all_channel[el]['passport'] }}<br><br></li>
+                            <li><b>Паспорт громадянина України:</b> {{ all_channel[el]['drivers_license'] }}<br><br>
+                            </li>
+                        </ol>
+                    </td>
+                </tr>
+            </table><br>
+
+            {% for s in all_channel[el].other[::] -%}
+                {{ s }}<br><br>
+            {% endfor %}
+            <h4>Результати відпрацювання SNIFER</h4><br>
+            {% for s in all_channel[el].snifer[::] -%}
+                {{ s }}<br><br>
+            {% endfor %}
+            <h4>Канали партнери / противники</h4><br>
+            <h5>Канали партнери:</h5><br>
+            <ol>{% for s in all_channel[el].channel_partners[::] -%}
+                <li>{{ s }}<br><br></li>
+            {% endfor %}</ol>
+            <h5>Канали противники:</h5><br>
+            <ol>{% for s in all_channel[el].Channels_opponents[::] -%}
+                <li>{{ s }}<br><br></li>
+            {% endfor %}
+            </ol>
+            <h4>Репости. Канали, які цитує «Музика 2020 | Новинки»</h4><br>
+            <h5>Канали, які робили репости:</h5>
+            <ol>{% for s in all_channel[el].channels_that_made_reposts[::] -%}
+                <li>{{ s }}<br><br></li>
+            {% endfor %}</ol>
+            {% if all_channel[el]['adres_img_for_channels_that_made_reposts'] !='/static/images/'+all_channel[el]["name"]+'/' %}
+                <img src="{{ all_channel[el]['adres_img_for_channels_that_made_reposts'] }}" width="600px"
+                     align="center" hspace="20%" vspace="1%"/>
+            {% endif %}<br>
+            <h5>Канали, які цитує телеграм-канал:</h5>
+            <ol>{% for s in all_channel[el].channels_quoted_by_the_telegram_channel[::] -%}
+                <li>{{ s }}<br><br></li>
+            {% endfor %}</ol>
+            {% if all_channel[el]['adres_img_for_channels_quoted_by_the_telegram_channel'] !='/static/images/'+all_channel[el]["name"]+'/' %}
+                <img src="{{ all_channel[el]['adres_img_for_channels_quoted_by_the_telegram_channel'] }}" width="600px"
+                     align="center" hspace="20%" vspace="1%"/>
+            {% endif %}
+            <br><br><br><br>
+
+        {% endfor %}
+    </div>
+{% endblock %}

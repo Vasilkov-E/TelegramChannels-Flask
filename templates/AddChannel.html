@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container-xl">
+        {#    <h2>Добавление стиха</h2>#}
+        <form  method="post" enctype="multipart/form-data">
+            <blockquote class="blockquote text-center">
+                <h3>Загальна інформація про ресурс</h3>
+            </blockquote>
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
+            <p>
+                {{ form.name.label }} <br>
+                {{ form.name(size=100) }}
+            </p>
+            <p>
+                {{ form.general_information_about_the_resource.label }} <br>
+                {{ form.general_information_about_the_resource(size=100) }}
+            </p>
+            <p>
+                {{ form.adres_img_for_general_information_about_the_resource.label }} <br>
+                {{ form.adres_img_for_general_information_about_the_resource }}
+            </p>
+            <p>
+                {{ form.date_of_resourc_creation.label }} <br>
+                {{ form.date_of_resourc_creation(size=100) }}
+            </p>
+            <p>
+                {{ form.other_social_platforms.label }} <br>
+                {{ form.other_social_platforms(size=100) }}
+            </p>
+
+            <blockquote class="blockquote text-center">
+            <h3>Вміст ресурсу (станом на: {{ form.resource_content_date }} )</h3> <br>
+            </blockquote>
+            <p>
+                Канал розміщує близько {{ form.publications_per_day(size=7) }} публікацій в день.
+            </p>
+            <p>
+                Основна спрямованість каналу: {{ form.the_main_focus_of_the_channel(size=65) }}
+            </p>
+
+            <p>
+                Суміжні напрямки: {{ form.related_areas(size=78) }}
+            </p>
+            <p>
+                Вміст каналу: {{ form.channel_content(size=84) }}
+            </p>
+            <p>
+                Перегляди: {{ form.adres_img_for_views }}
+            </p>
+            <blockquote class="blockquote text-center">
+                <h3>Контактна інформація для зв'язку</h3>
+            </blockquote>
+            <p>
+                На каналі зазначений контакт для співпраці та розміщення
+                реклами: {{ form.contact_information_for_communication(size=25) }}
+            </p>
+            <p>
+                Завантажити фото {{ form.adres_img_for_contact_information_for_communication(size=25) }}
+            </p>
+            <blockquote class="blockquote text-center">
+                <h3>Платіжні засоби (належність), прайси на оплату реклами, умови</h3>
+            </blockquote>
+            <p>
+                {{ form.price_for_advertising_news.label }} <br>
+                {{ form.price_for_advertising_news(rows='5',cols='80') }}
+            </p>
+            <p>
+                {{ form.payment_is_made_by_card.label }} <br>
+                {{ form.payment_is_made_by_card(rows='5',cols='80') }}
+            </p>
+            <blockquote class="blockquote text-center">
+                <h3>Причетні до ресурсу особи</h3>
+            </blockquote>
+
+            <p>
+                1. ФІО {{ form.name_administrator(size=90) }}
+            </p>
+            <p>
+                {{ form.adres_img_for_photo_admin }}
+            </p>
+            <p>
+                2. Дата народження: {{ form.date_of_birth(size=25) }}
+            </p>
+            <p>
+                3. Місце народження: {{ form.place_of_birth(size=74) }}
+            </p>
+            <p>
+                4. Телефон: {{ form.phone_number(size=85) }}
+            </p>
+            <p>
+                5. Паспорт громадянина України: {{ form.passport(size=62) }}
+            </p>
+            <p>
+                6. Посвідчення водія: {{ form.drivers_license(size=75) }}
+            </p>
+            <p>
+                7. {{ form.other.label }} <br>
+                {{ form.other(rows='5',cols='80') }}
+            </p>
+            <blockquote class="blockquote text-center">
+                <h3>Результати відпрацювання SNIFER</h3>
+            </blockquote>
+            <p>
+                {{ form.snifer(rows='5',cols='80') }}
+            </p>
+            <blockquote class="blockquote text-center">
+            <h3>Канали партнери / противники</h3>
+            </blockquote>
+            <p>
+                {{ form.channel_partners.label }} <br>
+                {{ form.channel_partners(rows='5',cols='80') }}
+            </p>
+            <p>
+                {{ form.Channels_opponents.label }} <br>
+                {{ form.Channels_opponents(rows='5',cols='80') }}
+            </p>
+            <blockquote class="blockquote text-center">
+                <h3>Репости. Канали, які цитує цей канал</h3>
+            </blockquote>
+            <p>
+                {{ form.channels_that_made_reposts.label }} <br>
+                {{ form.channels_that_made_reposts(rows='5',cols='80') }}
+            </p>
+            <p>
+                {{ form.adres_img_for_channels_that_made_reposts }}
+            </p>
+            <p>
+                {{ form.channels_quoted_by_the_telegram_channel.label }} <br>
+                {{ form.channels_quoted_by_the_telegram_channel(rows='5',cols='80') }}
+            </p>
+            <p>
+                {{ form.adres_img_for_channels_quoted_by_the_telegram_channel }}
+            </p>
+
+            {#    <p>#}
+            {#        {{ form.poem.label }} <br>#}
+            {#        {{ form.poem(rows='20',cols='70') }}#}
+            {#    </p>#}
+            <p>
+                {{ form.submit() }}
+            </p>
+            <p>
+                {{ statys }}
+            </p>
+        </form>
+    </div>
+{% endblock %}
