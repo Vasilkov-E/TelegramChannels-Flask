@@ -13,7 +13,7 @@ from sanitize_filename import sanitize
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
-app.secret_key = 'xpq3nbgis,391mfjsd.32pd,59sm/g[s,3wofdm3idmgiuwlkhggsw4lvb84'
+app.secret_key = 'KEY'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
